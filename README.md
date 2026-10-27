@@ -1,1 +1,39 @@
-# -
+# 工時管家
+
+團隊共用的工時掛列與額度控管系統。首頁顯示可用工編與剩餘工時；超額時整筆拒絕，不會扣抵部分工時。
+
+## 啟用網站
+
+網頁已建置為根目錄的 **index.html**，可直接由 GitHub Pages 發布：
+
+1. 開啟本儲存庫的 **Settings → Pages**。
+2. 在 **Build and deployment → Source** 選 **Deploy from a branch**。
+3. Branch 選 **main**，資料夾選 **/(root)**，按 **Save**。
+4. 等 GitHub Pages 顯示發布成功後，使用該頁顯示的網站連結。
+
+此版本使用相對路徑，可放在任何儲存庫名稱之下。網頁開啟後按「查看操作範例」，即可試驗工編 123 剩 5 小時、C 送出 10 小時遭拒絕的情境。
+
+## 掛列與管理
+
+- 知道網站連結的人可直接掛列，無須登入。
+- 「管理後台」連到雲端管理入口，以 ChatGPT 帳號登入。
+- 管理員可建立工編、調整總工時、作廢並返還工時及匯出明細。
+- 系統擁有者可依 ChatGPT 登入 Email 新增管理人員。
+
+共用工時與管理權限保存在現有的雲端後端及 D1 資料庫。GitHub 儲存庫保存網頁與原始碼，沒有儲存正式掛列紀錄。
+
+後端管理入口：https://hourledger-1027.mytming66888.chatgpt.site/manage
+
+## 修改網頁
+
+可編輯原始碼放在 `source/`。Node.js 22.13 以上，安裝 `source/package.json` 指定版本的 pnpm，然後執行：
+
+```sh
+cd source
+pnpm install --frozen-lockfile
+pnpm run build
+```
+
+建置會產生 `source/dist/`，並更新根目錄的單檔 `index.html`。將原始碼與更新後的 `index.html` 一起提交到 main，Pages 即會從 main 根目錄發布新版。
+
+現有後端允許的公開掛列來源為 `https://oaalbert.github.io`。若日後改用其他帳號或自訂網域，須同步調整後端的允許來源設定。
